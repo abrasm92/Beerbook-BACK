@@ -6,8 +6,14 @@ const userSchema = new Schema({
   password: { type: String, minlength: 8, maxlength: 30 },
   email: { type: String, unique: true },
   image: { type: String, default: null },
-  creations: [{ type: Schema.Types.ObjectId, ref: "Beer" }],
-  favorites: [{ type: Schema.Types.ObjectId, ref: "Beer" }],
+  creations: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Beer" }],
+    default: [],
+  },
+  favorites: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Beer" }],
+    default: [],
+  },
   age: { type: Date, default: null },
   country: { type: String, default: null },
   admin: { type: Boolean, default: false },
