@@ -52,8 +52,11 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/index.js",
-      "!src/initializeServer.js",
-      "!src/database/index.js"
+      "!src/server/initializeServer.js",
+      "!src/db/index.js",
+      "!src/db/**/*.js",
+      "!src/server/routers/*.js",
+      "!src/server/index.js"
     ]
   }
 }
