@@ -54,7 +54,6 @@
       "!src/index.js",
       "!src/server/initializeServer.js",
       "!src/db/index.js",
-      "!src/db/**/*.js",
       "!src/server/routers/*.js",
       "!src/server/index.js"
     ]
