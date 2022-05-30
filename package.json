@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src",
+    "start-dev": "nodemon src -q",
+    "test": "jest --watchAll=false --passWithNoTests",
+    "test-coverage": "jest --watchAll --coverage --watchAll=false",
     "prepare": "husky install"
   },
   "repository": {
@@ -49,7 +52,8 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/index.js",
-      "!src/initializeServer.js"
+      "!src/initializeServer.js",
+      "!src/database/index.js"
     ]
   }
 }
