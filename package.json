@@ -2,7 +2,7 @@
   "name": "back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "node src",
     "start-dev": "nodemon src -q",
@@ -53,10 +53,7 @@
       "src/**/*.js",
       "!src/index.js",
       "!src/server/initializeServer.js",
-      "!src/db/index.js",
-      "!src/db/**/*.js",
-      "!src/server/routers/*.js",
-      "!src/server/index.js"
+      "!src/db/index.js"
     ]
   }
 }
