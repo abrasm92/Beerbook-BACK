@@ -5,7 +5,7 @@ const { userRegister } = require("./userController");
 describe("Given a userRegister function", () => {
   describe("When it's invoked with a user credential on a req' body", () => {
     test("Then it call res' method status 201 and method json with a message 'User created'", async () => {
-      User.findOne = jest.fn().mockResolvedValue(null).mockResolvedValue(null);
+      User.findOne = jest.fn().mockResolvedValueOnce(null);
       User.create = jest.fn().mockResolvedValue(singleUser);
       const req = {
         body: singleUser,
@@ -47,8 +47,8 @@ describe("Given a userRegister function", () => {
     test("Then it call next function", async () => {
       User.findOne = jest
         .fn()
-        .mockResolvedValue(null)
-        .mockResolvedValue(singleUser);
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(singleUser);
       const req = {
         body: singleUser,
       };

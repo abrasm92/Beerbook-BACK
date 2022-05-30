@@ -53,9 +53,7 @@
       "src/**/*.js",
       "!src/index.js",
       "!src/server/initializeServer.js",
-      "!src/db/index.js",
-      "!src/server/routers/*.js",
-      "!src/server/index.js"
+      "!src/db/index.js"
     ]
   }
 }
