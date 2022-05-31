@@ -9,6 +9,7 @@ const notFoundError = (req, res) => {
 const generalError = (error, req, res, next) => {
   if (error.error === "Bad Request") {
     const { body } = error.details;
+
     if (
       (body[0].type === "string.min" || body[0].type === "string.max") &&
       body[0].path[0] === "password"
@@ -26,6 +27,14 @@ const generalError = (error, req, res, next) => {
       res
         .status(error.statusCode)
         .json({ msg: "El username debe ser alfanumérico" });
+    }
+    if (body[0].type === "string.alphanum" && body[0].path[0] === "name") {
+      res
+        .status(error.statusCode)
+        .json({ msg: "El nombre debe ser alfanumérico" });
+    }
+    if (body[0].type === "string.email" && body[0].path[0] === "email") {
+      res.status(error.statusCode).json({ msg: "El email no es válido" });
     }
   }
   debug(chalk.red(`Error: ${error.customMessage}`));
