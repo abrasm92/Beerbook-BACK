@@ -1,4 +1,6 @@
+require("dotenv").config();
 const bcrypt = require("bcrypt");
+const jsonwebtoken = require("jsonwebtoken");
 const User = require("../../db/models/user");
 const customError = require("../../utilities/customError");
 
@@ -33,4 +35,32 @@ const userRegister = async (req, res, next) => {
   }
 };
 
-module.exports = { userRegister };
+const userLogin = async (req, res, next) => {
+  const { username: currentUsername, password: currentPassword } = req.body;
+  try {
+    const user = await User.findOne({ username: currentUsername });
+
+    if (user) {
+      const checkPassword = await bcrypt.compare(
+        currentPassword,
+        user.password
+      );
+      if (checkPassword) {
+        const userPayload = {
+          username: user.username,
+          id: user.id,
+        };
+        const token = jsonwebtoken.sign(userPayload, process.env.JWT_SECRET);
+        res.status(200).json({ token });
+      } else {
+        next(customError(401, "Incorrect username or password"));
+      }
+    } else {
+      next(customError(401, "Incorrect username or password"));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { userRegister, userLogin };

@@ -35,6 +35,8 @@ describe("Given a POST to the user/register endpoint", () => {
         .send({
           username: groupUsers[2].username,
           password: groupUsers[2].password,
+          email: groupUsers[2].email,
+          name: groupUsers[2].name,
         })
         .expect(201);
 

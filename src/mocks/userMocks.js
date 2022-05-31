@@ -1,7 +1,14 @@
 const singleUser = {
   name: "admin",
-  username: "admin",
+  username: "adminMock",
   password: "thegoodadmin",
+  email: "adminMock@admin.com",
+};
+
+const adminMock = {
+  name: "admin",
+  username: "admin",
+  password: "beerbook",
   email: "admin@admin.com",
 };
 
@@ -26,4 +33,4 @@ const groupUsers = [
   },
 ];
 
-module.exports = { singleUser, groupUsers };
+module.exports = { singleUser, groupUsers, adminMock };
