@@ -41,8 +41,10 @@ const userLogin = async (req, res, next) => {
     const user = await User.findOne({ username: currentUsername });
 
     if (user) {
-      const checkPassword = bcrypt.compare(currentPassword, user.password);
-
+      const checkPassword = await bcrypt.compare(
+        currentPassword,
+        user.password
+      );
       if (checkPassword) {
         const userPayload = {
           username: user.username,
