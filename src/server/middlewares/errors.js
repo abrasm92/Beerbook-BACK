@@ -25,7 +25,7 @@ const generalError = (error, req, res, next) => {
     if (body[0].type === "string.alphanum" && body[0].path[0] === "username") {
       res
         .status(error.statusCode)
-        .json({ msg: "el username debe ser alfanumérico" });
+        .json({ msg: "El username debe ser alfanumérico" });
     }
   }
   debug(chalk.red(`Error: ${error.customMessage}`));
