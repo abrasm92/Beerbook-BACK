@@ -1,5 +1,4 @@
 const request = require("supertest");
-const bcrypt = require("bcrypt");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const mongoose = require("mongoose");
 const app = require("..");
@@ -42,23 +41,6 @@ describe("Given a POST to the user/register endpoint", () => {
         .expect(201);
 
       expect(body).toEqual(expectJson);
-    });
-  });
-});
-
-describe("Given a POST to the user/login endpoint", () => {
-  describe("When invoked with a routing request", () => {
-    test("Then it should respond the res.status 200 with a token", async () => {
-      jest.spyOn(bcrypt, "compare").mockResolvedValue(true);
-      const { body } = await request(app)
-        .post("/user/login")
-        .send({
-          username: groupUsers[1].username,
-          password: groupUsers[1].password,
-        })
-        .expect(200);
-
-      expect(body).toHaveProperty("token");
     });
   });
 });
