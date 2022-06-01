@@ -8,7 +8,7 @@ const beerSchema = new Schema({
   ibu: { type: Number, default: null },
   country: { type: String },
   description: { type: String, default: null },
-  image: { type: String },
+  image: { type: String, default: null },
   owner: { type: Schema.Types.ObjectId },
 });
 
