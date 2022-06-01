@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const userRouter = require("./routers/userRouter");
 const { notFoundError, generalError } = require("./middlewares/errors");
+const beerRouter = require("./routers/beerRouter");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/user", userRouter);
+app.use("/beer", beerRouter);
 
 app.use(notFoundError);
 app.use(generalError);
