@@ -5,10 +5,10 @@ const beerSchema = new Schema({
   brewery: { type: String },
   style: { type: String },
   degrees: { type: Number },
-  ibu: { type: Number, default: null },
+  ibu: { type: Number },
   country: { type: String },
-  description: { type: String, default: null },
-  image: { type: String, default: null },
+  description: { type: String },
+  image: { type: String },
   owner: { type: Schema.Types.ObjectId },
 });
 
