@@ -1,4 +1,5 @@
 const Beer = require("../../db/models/beer");
+const customError = require("../../utilities/customError");
 
 const getAllBeers = async (req, res, next) => {
   try {
@@ -14,7 +15,11 @@ const getBeerById = async (req, res, next) => {
 
   try {
     const beer = await Beer.findById(currentId);
-    res.status(200).json({ beer });
+    if (beer) {
+      res.status(200).json({ beer });
+    } else {
+      next(customError(404, "Id beer found"));
+    }
   } catch (error) {
     next(error);
   }
