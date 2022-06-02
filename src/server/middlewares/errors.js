@@ -18,20 +18,22 @@ const generalError = (error, req, res, next) => {
         .status(error.statusCode)
         .json({ msg: "La contraseña debe ser entre 8 y 30 carácteres" });
     }
-    if (body[0].type === "string.alphanum" && body[0].path[0] === "password") {
-      res
-        .status(error.statusCode)
-        .json({ msg: "La contraseña debe ser alfanumérica" });
-    }
-    if (body[0].type === "string.alphanum" && body[0].path[0] === "username") {
-      res
-        .status(error.statusCode)
-        .json({ msg: "El username debe ser alfanumérico" });
-    }
-    if (body[0].type === "string.alphanum" && body[0].path[0] === "name") {
-      res
-        .status(error.statusCode)
-        .json({ msg: "El nombre debe ser alfanumérico" });
+    if (body[0].type === "string.alphanum") {
+      if (body[0].path[0] === "password") {
+        res
+          .status(error.statusCode)
+          .json({ msg: "La contraseña debe ser alfanumérica" });
+      }
+      if (body[0].path[0] === "username") {
+        res
+          .status(error.statusCode)
+          .json({ msg: "El username debe ser alfanumérico" });
+      }
+      if (body[0].path[0] === "name") {
+        res
+          .status(error.statusCode)
+          .json({ msg: "El nombre debe ser alfanumérico" });
+      }
     }
     if (body[0].type === "string.email" && body[0].path[0] === "email") {
       res.status(error.statusCode).json({ msg: "El email no es válido" });
