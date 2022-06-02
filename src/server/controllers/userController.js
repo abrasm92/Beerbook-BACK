@@ -23,12 +23,12 @@ const userRegister = async (req, res, next) => {
         const cryptedPassword = await bcrypt.hash(newPassword, 10);
         const newUser = { ...user, password: cryptedPassword };
         await User.create(newUser);
-        res.status(201).json({ msg: "User created" });
+        res.status(201).json({ message: "User created" });
       } else {
-        next(customError(409, "This email already exists"));
+        next(customError(409, "Este e-mail ya existe"));
       }
     } else {
-      next(customError(409, "This username already exists"));
+      next(customError(409, "Este usuario ya existe"));
     }
   } catch (error) {
     next(error);
@@ -53,10 +53,10 @@ const userLogin = async (req, res, next) => {
         const token = jsonwebtoken.sign(userPayload, process.env.JWT_SECRET);
         res.status(200).json({ token });
       } else {
-        next(customError(401, "Incorrect username or password"));
+        next(customError(401, "Usuario o contraseña incorrectos"));
       }
     } else {
-      next(customError(401, "Incorrect username or password"));
+      next(customError(401, "Usuario o contraseña incorrectos"));
     }
   } catch (error) {
     next(error);

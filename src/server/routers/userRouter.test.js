@@ -29,7 +29,7 @@ afterAll(async () => {
 describe("Given a POST to the user/register endpoint", () => {
   describe("When invoked with a routing request", () => {
     test("Then it should respond the res.status 201 with json with message 'User created'", async () => {
-      const expectJson = { msg: "User created" };
+      const expectJson = { message: "User created" };
       const { body } = await request(app)
         .post("/user/register")
         .send({
