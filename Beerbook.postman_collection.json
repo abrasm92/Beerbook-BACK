@@ -1,162 +1,138 @@
 {
-	"info": {
-		"_postman_id": "8e6425a5-60e0-45a2-a8da-9d3206416901",
-		"name": "Beerbook",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20627658"
-	},
-	"item": [
-		{
-			"name": "userRegisterLocal",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"admin\",\r\n    \"username\": \"admin\",\r\n    \"password\": \"beerbook\",\r\n    \"email\": \"admin@admin.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{local}}user/register",
-					"host": [
-						"{{local}}user"
-					],
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "userLoginLocal",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"admin.\",\r\n    \"password\": \"beerbook\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{local}}user/login",
-					"host": [
-						"{{local}}user"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "userLoginRender",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"beerbook\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{origin}}user/login",
-					"host": [
-						"{{origin}}user"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "userRegisterRender",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "{{origin}}user/register",
-					"host": [
-						"{{origin}}user"
-					],
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAllBeerLocal",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{local}}beer/",
-					"host": [
-						"{{local}}beer"
-					],
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getBeerByIdLocal",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "origin",
-			"value": "https://abraham-saavedra-back-final-project.onrender.com/",
-			"type": "string"
-		},
-		{
-			"key": "local",
-			"value": "http://localhost:4000/",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "8e6425a5-60e0-45a2-a8da-9d3206416901",
+    "name": "Beerbook",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20627658"
+  },
+  "item": [
+    {
+      "name": "userRegisterLocal",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"admin\",\r\n    \"username\": \"admin\",\r\n    \"password\": \"beerbook\",\r\n    \"email\": \"admin@admin.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{local}}user/register",
+          "host": ["{{local}}user"],
+          "path": ["register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "userLoginLocal",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"admin.\",\r\n    \"password\": \"beerbook\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{local}}user/login",
+          "host": ["{{local}}user"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "userLoginRender",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"beerbook\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}user/login",
+          "host": ["{{origin}}user"],
+          "path": ["login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "userRegisterRender",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}user/register",
+          "host": ["{{origin}}user"],
+          "path": ["register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAllBeerLocal",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{local}}beer/",
+          "host": ["{{local}}beer"],
+          "path": [""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getBeerByIdLocal",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "origin",
+      "value": "https://abraham-saavedra-back-final-project.onrender.com/",
+      "type": "string"
+    },
+    {
+      "key": "local",
+      "value": "http://localhost:4000/",
+      "type": "string"
+    }
+  ]
 }
