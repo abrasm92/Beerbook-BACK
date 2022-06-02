@@ -22,7 +22,7 @@ describe("Given a userRegister function", () => {
       };
       const next = jest.fn();
       const expectStatusValue = 201;
-      const expectJson = { msg: "User created" };
+      const expectJson = { message: "User created" };
 
       await userRegister(req, res, next);
 
