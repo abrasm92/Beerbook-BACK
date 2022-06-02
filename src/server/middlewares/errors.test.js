@@ -70,7 +70,7 @@ describe("Given a generalError function", () => {
       };
       const expectedStatus = 400;
       const expectedMessage = {
-        msg: "La contraseña debe ser entre 8 y 30 carácteres",
+        message: "La contraseña debe ser entre 8 y 30 carácteres",
       };
 
       await generalError(error, null, res, null);
@@ -95,7 +95,7 @@ describe("Given a generalError function", () => {
       };
       const expectedStatus = 400;
       const expectedMessage = {
-        msg: "La contraseña debe ser entre 8 y 30 carácteres",
+        message: "La contraseña debe ser entre 8 y 30 carácteres",
       };
 
       await generalError(error, null, res, null);
@@ -120,7 +120,7 @@ describe("Given a generalError function", () => {
       };
       const expectedStatus = 400;
       const expectedMessage = {
-        msg: "La contraseña debe ser alfanumérica",
+        message: "La contraseña debe ser alfanumérica",
       };
 
       await generalError(error, null, res, null);
@@ -145,7 +145,7 @@ describe("Given a generalError function", () => {
       };
       const expectedStatus = 400;
       const expectedMessage = {
-        msg: "El username debe ser alfanumérico",
+        message: "El username debe ser alfanumérico",
       };
 
       await generalError(error, null, res, null);
@@ -170,7 +170,7 @@ describe("Given a generalError function", () => {
       };
       const expectedStatus = 400;
       const expectedMessage = {
-        msg: "El nombre debe ser alfanumérico",
+        message: "El nombre debe ser alfanumérico",
       };
 
       await generalError(error, null, res, null);
@@ -195,7 +195,7 @@ describe("Given a generalError function", () => {
       };
       const expectedStatus = 400;
       const expectedMessage = {
-        msg: "El email no es válido",
+        message: "El email no es válido",
       };
 
       await generalError(error, null, res, null);
