@@ -29,8 +29,13 @@ afterAll(async () => {
 describe("Given a GET to the beer/ endpoint", () => {
   describe("When invoked with a routing request", () => {
     test("Then it should respond the res.status 200 with json with a list of beers", async () => {
+      const token =
+        "Bearer 47D86353BDEBE34CA8856D5A96496CE0BC5EC64F19D9B22E3C72FBC5040CAB56";
       const expectedLengthBeers = 2;
-      const { body } = await request(app).get("/beer/").expect(200);
+      const { body } = await request(app)
+        .get("/beer/")
+        .set("Authorization", token)
+        .expect(200);
 
       expect(body.beers).toHaveLength(expectedLengthBeers);
     });
