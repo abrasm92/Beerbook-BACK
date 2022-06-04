@@ -18,11 +18,28 @@ const getBeerById = async (req, res, next) => {
     if (beer) {
       res.status(200).json({ beer });
     } else {
-      next(customError(404, "Id beer found"));
+      next(customError(404, "Cerveza no encontrada"));
     }
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { getAllBeers, getBeerById };
+const deleteBeerById = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const deletedBeer = await Beer.findByIdAndDelete(id);
+    if (deletedBeer) {
+      res
+        .status(202)
+        .json({ message: `La cerveza: ${deletedBeer.name} ha sido borrada` });
+    } else {
+      next(customError(404, "La cerveza que busca borrar no se encuentra"));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllBeers, getBeerById, deleteBeerById };
