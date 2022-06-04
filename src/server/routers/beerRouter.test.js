@@ -1,6 +1,7 @@
 const request = require("supertest");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const { default: mongoose } = require("mongoose");
+const jsonwebtoken = require("jsonwebtoken");
 const app = require("..");
 const connectDB = require("../../db");
 const Beer = require("../../db/models/beer");
@@ -33,6 +34,7 @@ afterAll(async () => {
 describe("Given a GET to the beer/ endpoint", () => {
   describe("When invoked with a routing request", () => {
     test("Then it should respond the res.status 200 with json with a list of beers", async () => {
+      jest.spyOn(jsonwebtoken, "verify").mockReturnValue({ id: "1234" });
       const expectedLengthBeers = 2;
       const {
         body: { token },
