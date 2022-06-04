@@ -37,7 +37,9 @@ describe("Given a GET to the beer/ endpoint", () => {
     test("Then it should respond the res.status 200 with json with a list of beers", async () => {
       jest.spyOn(jsonwebtoken, "verify").mockReturnValue({ id: "1234" });
       jest.spyOn(bcrypt, "compare").mockReturnValue(true);
+      jest.spyOn(jsonwebtoken, "sign").mockReturnValue("mockToken");
       const expectedLengthBeers = 2;
+
       const {
         body: { token },
       } = await request(app)
