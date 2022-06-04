@@ -1,10 +1,14 @@
 const request = require("supertest");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const { default: mongoose } = require("mongoose");
+const jsonwebtoken = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const app = require("..");
 const connectDB = require("../../db");
 const Beer = require("../../db/models/beer");
 const { groupOfBeer } = require("../../mocks/beerMocks");
+const { singleUser } = require("../../mocks/userMocks");
+const User = require("../../db/models/user");
 
 let mongoServer;
 beforeAll(async () => {
@@ -15,10 +19,12 @@ beforeAll(async () => {
 beforeEach(async () => {
   await Beer.create(groupOfBeer[0]);
   await Beer.create(groupOfBeer[1]);
+  await request(app).post("/user/register").send(singleUser).expect(201);
 });
 
 afterEach(async () => {
   await Beer.deleteMany({});
+  await User.deleteMany({});
 });
 
 afterAll(async () => {
@@ -29,8 +35,25 @@ afterAll(async () => {
 describe("Given a GET to the beer/ endpoint", () => {
   describe("When invoked with a routing request", () => {
     test("Then it should respond the res.status 200 with json with a list of beers", async () => {
+      jest.spyOn(jsonwebtoken, "verify").mockReturnValue({ id: "1234" });
+      jest.spyOn(bcrypt, "compare").mockReturnValue(true);
+      jest.spyOn(jsonwebtoken, "sign").mockReturnValue("mockToken");
       const expectedLengthBeers = 2;
-      const { body } = await request(app).get("/beer/").expect(200);
+
+      const {
+        body: { token },
+      } = await request(app)
+        .post("/user/login")
+        .send({
+          username: singleUser.username,
+          password: singleUser.password,
+        })
+        .expect(200);
+
+      const { body } = await request(app)
+        .get("/beer/")
+        .set("Authorization", `Bearer ${token}`)
+        .expect(200);
 
       expect(body.beers).toHaveLength(expectedLengthBeers);
     });
