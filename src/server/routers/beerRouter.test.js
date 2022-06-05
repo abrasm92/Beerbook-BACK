@@ -55,7 +55,7 @@ describe("Given a GET to the beer/ endpoint", () => {
         .set("Authorization", `Bearer ${token}`)
         .expect(200);
 
-      expect(body.beers).toHaveLength(expectedLengthBeers);
+      await expect(body.beers).toHaveLength(expectedLengthBeers);
     });
   });
 });

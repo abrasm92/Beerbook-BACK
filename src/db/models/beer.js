@@ -9,7 +9,7 @@ const beerSchema = new Schema({
   country: { type: String },
   description: { type: String },
   image: { type: String },
-  owner: { type: Schema.Types.ObjectId },
+  owner: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 const Beer = model("Beer", beerSchema, "beers");

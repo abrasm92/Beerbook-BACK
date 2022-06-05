@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const Beer = require("../../db/models/beer");
 const customError = require("../../utilities/customError");
 
@@ -42,4 +44,41 @@ const deleteBeerById = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllBeers, getBeerById, deleteBeerById };
+const createBeer = async (req, res, next) => {
+  const beer = req.body;
+  const { file } = req;
+  const prefixImage = Date.now();
+  const ownerId = req.userId;
+  try {
+    fs.rename(
+      path.join("uploads", "images", "beers", file.filename),
+      path.join(
+        "uploads",
+        "images",
+        "beers",
+        `${prefixImage}-${file.originalname}`
+      ),
+      (error) => {
+        if (error) {
+          next(error);
+        }
+      }
+    );
+    const newImage = `images/users/${prefixImage}-${file.originalname}`;
+    const newBeer = {
+      ...beer,
+      owner: ownerId,
+      image: newImage,
+    };
+    const createdBeer = await Beer.create(newBeer);
+
+    res.status(201).json({
+      message: `La cerveza: ${createdBeer.name} ha sido añadida`,
+      beer: createdBeer,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAllBeers, getBeerById, deleteBeerById, createBeer };
