@@ -81,4 +81,58 @@ const createBeer = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllBeers, getBeerById, deleteBeerById, createBeer };
+const updateBeerById = async (req, res, next) => {
+  const beer = req.body;
+  const { id } = req.params;
+  const { file } = req;
+  const prefixImage = Date.now();
+  const currentBeer = await Beer.findById(id);
+  try {
+    if (typeof file === "undefined") {
+      const updateBeer = {
+        ...beer,
+        image: currentBeer.image,
+      };
+      const beerToUpdate = await Beer.findByIdAndUpdate(id, updateBeer);
+      res.status(204).json({
+        message: `La cerveza: ${beerToUpdate.name} ha sido modificada`,
+        beer: beerToUpdate,
+      });
+    } else {
+      fs.rename(
+        path.join("uploads", "images", "beers", file.filename),
+        path.join(
+          "uploads",
+          "images",
+          "beers",
+          `${prefixImage}-${file.originalname}`
+        ),
+        (error) => {
+          if (error) {
+            next(error);
+          }
+        }
+      );
+      const newImage = `images/users/${prefixImage}-${file.originalname}`;
+      const updateBeer = {
+        ...beer,
+        image: newImage,
+      };
+      const beerToUpdate = await Beer.findByIdAndUpdate(id, updateBeer);
+      res.status(204).json({
+        message: `La cerveza: ${beerToUpdate.name} ha sido modificada`,
+        beer: beerToUpdate,
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  getAllBeers,
+  getBeerById,
+  deleteBeerById,
+  createBeer,
+  updateBeerById,
+};

@@ -6,6 +6,7 @@ const {
   getBeerById,
   deleteBeerById,
   createBeer,
+  updateBeerById,
 } = require("../controllers/beerController");
 
 const uploadUser = multer({ dest: path.join("uploads/images/beers") });
@@ -16,5 +17,6 @@ beerRouter.get("/", getAllBeers);
 beerRouter.get("/:id", getBeerById);
 beerRouter.delete("/:id", deleteBeerById);
 beerRouter.post("/", uploadUser.single("image"), createBeer);
+beerRouter.put("/:id", uploadUser.single("image"), updateBeerById);
 
 module.exports = beerRouter;

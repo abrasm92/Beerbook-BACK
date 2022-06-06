@@ -8,7 +8,7 @@ const singleBeer = {
   country: "EEUU",
   desciption:
     "Cerveza de color ámbar, con aromas intensos de cítricos, con final lig…",
-  image: null,
+  image: "215615460324502435058-fake-file.png",
   owner: null,
 };
 
