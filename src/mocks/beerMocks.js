@@ -6,7 +6,7 @@ const singleBeer = {
   degrees: 6.5,
   IBU: 25,
   country: "EEUU",
-  desciption:
+  description:
     "Cerveza de color ámbar, con aromas intensos de cítricos, con final lig…",
   image: "215615460324502435058-fake-file.png",
   owner: null,
@@ -21,7 +21,7 @@ const groupOfBeer = [
     degrees: 6.5,
     IBU: 25,
     country: "EEUU",
-    desciption:
+    description:
       "Cerveza de color ámbar, con aromas intensos de cítricos, con final lig…",
     image: null,
     owner: null,
@@ -34,7 +34,7 @@ const groupOfBeer = [
     degrees: 8.3,
     IBU: 60,
     country: "EEUU",
-    desciption:
+    description:
       "Cerveza negra con gran espuma color marrón con arómas predominantes a …",
     image: null,
     owner: null,
@@ -47,7 +47,7 @@ const groupOfBeer = [
     degrees: 8.5,
     IBU: null,
     country: "Bélgica",
-    desciption:
+    description:
       "Cerveza rojiza oscura con espuma densa, cuerpo medio suave y aromatica…",
     image: null,
     owner: null,
