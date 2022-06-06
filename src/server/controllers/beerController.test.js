@@ -1,9 +1,12 @@
+const fs = require("fs");
+const path = require("path");
 const Beer = require("../../db/models/beer");
 const { groupOfBeer, singleBeer } = require("../../mocks/beerMocks");
 const {
   getAllBeers,
   getBeerById,
   deleteBeerById,
+  createBeer,
 } = require("./beerController");
 
 describe("Given a getAllBeers function", () => {
@@ -160,6 +163,67 @@ describe("Given a deleteBeerById function", () => {
       const next = jest.fn();
 
       await deleteBeerById(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a createBeer function", () => {
+  describe("When its invoked with a right beer", () => {
+    test("Then it should call res' method status 201 and a message", async () => {
+      const expectedMessage = `La cerveza: ${singleBeer.name} ha sido añadida`;
+      const expectStatus = 201;
+      const userID = "23458jh2j53j";
+      const imageFile = "fake-file.png";
+      const imageName = "215615460324502435058-fake-file.png";
+      fs.rename = jest.fn().mockReturnValue(imageName);
+      jest.spyOn(path, "join").mockResolvedValue(imageName);
+      Beer.create = jest.fn().mockResolvedValue(singleBeer);
+      const req = {
+        file: {
+          originalname: imageFile,
+        },
+        userId: userID,
+        body: singleBeer,
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      await createBeer(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectStatus);
+      expect(res.json).toHaveBeenCalledWith({
+        message: expectedMessage,
+        beer: singleBeer,
+      });
+    });
+  });
+
+  describe("When its invoked and something fails", () => {
+    test("Then it should call next function", async () => {
+      const userID = "23458jh2j53j";
+      const imageFile = "fake-file.png";
+      const imageName = "215615460324502435058-fake-file.png";
+      fs.rename = jest.fn().mockReturnValue(imageName);
+      jest.spyOn(path, "join").mockResolvedValue(imageName);
+      Beer.create = jest.fn().mockRejectedValue();
+      const req = {
+        file: {
+          originalname: imageFile,
+        },
+        userId: userID,
+        body: singleBeer,
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+
+      await createBeer(req, res, next);
 
       expect(next).toHaveBeenCalled();
     });
