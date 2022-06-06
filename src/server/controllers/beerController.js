@@ -94,7 +94,7 @@ const updateBeerById = async (req, res, next) => {
         image: currentBeer.image,
       };
       const beerToUpdate = await Beer.findByIdAndUpdate(id, updateBeer);
-      res.status(201).json({
+      res.status(204).json({
         message: `La cerveza: ${beerToUpdate.name} ha sido modificada`,
         beer: beerToUpdate,
       });
@@ -119,7 +119,7 @@ const updateBeerById = async (req, res, next) => {
         image: newImage,
       };
       const beerToUpdate = await Beer.findByIdAndUpdate(id, updateBeer);
-      res.status(201).json({
+      res.status(204).json({
         message: `La cerveza: ${beerToUpdate.name} ha sido modificada`,
         beer: beerToUpdate,
       });

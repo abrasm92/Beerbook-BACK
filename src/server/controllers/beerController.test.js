@@ -7,6 +7,7 @@ const {
   getBeerById,
   deleteBeerById,
   createBeer,
+  updateBeerById,
 } = require("./beerController");
 
 describe("Given a getAllBeers function", () => {
@@ -224,6 +225,88 @@ describe("Given a createBeer function", () => {
       const next = jest.fn();
 
       await createBeer(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a updateBeerById function", () => {
+  describe("When it's invoked with a file", () => {
+    test("Then it should call res' status 204 and  json with a message", async () => {
+      const expectedMessage = `La cerveza: ${singleBeer.name} ha sido modificada`;
+      const expectStatus = 204;
+      const imageFile = "fake-file.png";
+      const imageName = "215615460324502435058-fake-file.png";
+      fs.rename = jest.fn().mockReturnValue(imageName);
+      jest.spyOn(path, "join").mockResolvedValue(imageName);
+      Beer.findByIdAndUpdate = jest.fn().mockResolvedValue(singleBeer);
+      Beer.findById = jest.fn().mockResolvedValue(singleBeer);
+      const req = {
+        file: {
+          originalname: imageFile,
+        },
+        body: singleBeer,
+        params: { id: "21341243jlhhgljh12" },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      await updateBeerById(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectStatus);
+      expect(res.json).toHaveBeenCalledWith({
+        message: expectedMessage,
+        beer: singleBeer,
+      });
+    });
+  });
+
+  describe("When it's invoked withoud a file", () => {
+    test("Then it should call res' status 204 and  json with a message", async () => {
+      const expectedMessage = `La cerveza: ${singleBeer.name} ha sido modificada`;
+      const expectStatus = 204;
+      const imageName = "215615460324502435058-fake-file.png";
+      fs.rename = jest.fn().mockReturnValue(imageName);
+      jest.spyOn(path, "join").mockResolvedValue(imageName);
+      Beer.findByIdAndUpdate = jest.fn().mockResolvedValue(singleBeer);
+      Beer.findById = jest.fn().mockResolvedValue(singleBeer);
+      const req = {
+        body: singleBeer,
+        params: { id: "21341243jlhhgljh12" },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      await updateBeerById(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectStatus);
+      expect(res.json).toHaveBeenCalledWith({
+        message: expectedMessage,
+        beer: singleBeer,
+      });
+    });
+  });
+
+  describe("When it's invoked and somethink fail", () => {
+    test("Then it should call next function", async () => {
+      Beer.findByIdAndUpdate = jest.fn().mockRejectedValue();
+      Beer.findById = jest.fn().mockResolvedValue(singleBeer);
+      const req = {
+        body: singleBeer,
+        params: { id: "21341243jlhhgljh12" },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+
+      await updateBeerById(req, res, next);
 
       expect(next).toHaveBeenCalled();
     });
