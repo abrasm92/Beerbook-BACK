@@ -235,7 +235,7 @@ describe("Given a updateBeerById function", () => {
   describe("When it's invoked with a file", () => {
     test("Then it should call res' status 204 and  json with a message", async () => {
       const expectedMessage = `La cerveza: ${singleBeer.name} ha sido modificada`;
-      const expectStatus = 204;
+      const expectStatus = 200;
       const imageFile = "fake-file.png";
       const imageName = "215615460324502435058-fake-file.png";
       fs.rename = jest.fn().mockReturnValue(imageName);
@@ -253,8 +253,9 @@ describe("Given a updateBeerById function", () => {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
+      const next = jest.fn();
 
-      await updateBeerById(req, res);
+      await updateBeerById(req, res, next);
 
       expect(res.status).toHaveBeenCalledWith(expectStatus);
       expect(res.json).toHaveBeenCalledWith({
@@ -267,7 +268,7 @@ describe("Given a updateBeerById function", () => {
   describe("When it's invoked withoud a file", () => {
     test("Then it should call res' status 204 and  json with a message", async () => {
       const expectedMessage = `La cerveza: ${singleBeer.name} ha sido modificada`;
-      const expectStatus = 204;
+      const expectStatus = 200;
       const imageName = "215615460324502435058-fake-file.png";
       fs.rename = jest.fn().mockReturnValue(imageName);
       jest.spyOn(path, "join").mockResolvedValue(imageName);
@@ -281,8 +282,9 @@ describe("Given a updateBeerById function", () => {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
+      const next = jest.fn();
 
-      await updateBeerById(req, res);
+      await updateBeerById(req, res, next);
 
       expect(res.status).toHaveBeenCalledWith(expectStatus);
       expect(res.json).toHaveBeenCalledWith({
