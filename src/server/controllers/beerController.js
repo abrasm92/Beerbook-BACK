@@ -96,12 +96,10 @@ const updateBeerById = async (req, res, next) => {
       await Beer.findByIdAndUpdate(id, updateBeer);
       const beerToUpdate = await Beer.findById(id);
 
-      const data = {
+      res.status(200).json({
         message: `La cerveza: ${beerToUpdate.name} ha sido modificada`,
         beer: beerToUpdate,
-      };
-
-      res.status(200).json(data);
+      });
     } else {
       fs.rename(
         path.join("uploads", "images", "beers", file.filename),
@@ -124,12 +122,11 @@ const updateBeerById = async (req, res, next) => {
       };
       await Beer.findByIdAndUpdate(id, updateBeer);
       const beerToUpdate = await Beer.findById(id);
-      const data = {
+
+      res.status(200).json({
         message: `La cerveza: ${beerToUpdate.name} ha sido modificada`,
         beer: beerToUpdate,
-      };
-
-      res.status(200).json(data);
+      });
     }
   } catch (error) {
     next(error);
