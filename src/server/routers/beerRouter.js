@@ -9,7 +9,10 @@ const {
   updateBeerById,
 } = require("../controllers/beerController");
 
-const uploadUser = multer({ dest: path.join("uploads/images/beers") });
+const uploadUser = multer({
+  dest: path.join("uploads/images/beers"),
+  limits: { fileSize: 8000000 },
+});
 
 const beerRouter = express.Router();
 
