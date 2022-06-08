@@ -51,7 +51,7 @@ describe("Given a GET to the beer/ endpoint", () => {
         .expect(200);
 
       const { body } = await request(app)
-        .get(`/beer/${0}`)
+        .get(`/beer/page/${0}`)
         .set("Authorization", `Bearer ${token}`)
         .expect(200);
 
