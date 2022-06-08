@@ -1,12 +1,17 @@
 const fs = require("fs");
 const path = require("path");
 const Beer = require("../../db/models/beer");
+const beerpage = require("../../utilities/beerPage");
 const customError = require("../../utilities/customError");
 
 const getAllBeers = async (req, res, next) => {
+  const { page } = req.params;
   try {
     const beers = await Beer.find();
-    res.status(200).json({ beers });
+
+    const response = beerpage(beers, page);
+
+    res.status(200).json(response);
   } catch (error) {
     next(error);
   }

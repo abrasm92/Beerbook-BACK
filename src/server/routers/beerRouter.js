@@ -13,7 +13,7 @@ const uploadUser = multer({ dest: path.join("uploads/images/beers") });
 
 const beerRouter = express.Router();
 
-beerRouter.get("/", getAllBeers);
+beerRouter.get("/:page", getAllBeers);
 beerRouter.get("/:id", getBeerById);
 beerRouter.delete("/:id", deleteBeerById);
 beerRouter.post("/", uploadUser.single("image"), createBeer);
