@@ -18,10 +18,14 @@ describe("Given a getAllBeers function", () => {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      const expectStatus = 200;
-      const expectJson = { beers: groupOfBeer };
 
-      await getAllBeers(null, res);
+      const expectStatus = 200;
+      const expectJson = { beersOnPage: groupOfBeer, totalPages: 1 };
+      const req = {
+        params: { page: 0 },
+      };
+
+      await getAllBeers(req, res);
 
       expect(res.status).toHaveBeenCalledWith(expectStatus);
       expect(res.json).toHaveBeenCalledWith(expectJson);
@@ -32,8 +36,11 @@ describe("Given a getAllBeers function", () => {
     test("Then it should call next function", async () => {
       Beer.find = jest.fn().mockRejectedValue();
       const next = jest.fn();
+      const req = {
+        params: "0",
+      };
 
-      await getAllBeers(null, null, next);
+      await getAllBeers(req, null, next);
 
       expect(next).toHaveBeenCalled();
     });

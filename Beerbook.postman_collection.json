@@ -99,10 +99,334 @@
       "response": []
     },
     {
+      "name": "getAllBeerRender",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}beer/0",
+          "host": ["{{origin}}beer"],
+          "path": ["0"]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "getBeerByIdLocal",
       "request": {
         "method": "GET",
         "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "getBeerByIdRender",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}beer/6297a8369ab4b03687f15b7e",
+          "host": ["{{origin}}beer"],
+          "path": ["6297a8369ab4b03687f15b7e"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteBeerByIdLocal",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{local}}beer/",
+          "host": ["{{local}}beer"],
+          "path": [""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteBeerByIdRender",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}beer/",
+          "host": ["{{origin}}beer"],
+          "path": [""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createBeerLocal",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2Mjk1MjFhY2E4N2ZjOWJiNjRhOGJkOGEiLCJpYXQiOjE2NTQ0MjYyMDZ9.jhFulO4Vb4e0lAP1TVsoTTOgMTQwz3YNDJP2665j_0I",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "CervezaNombre",
+              "type": "text"
+            },
+            {
+              "key": "brewery",
+              "value": "CervezaCerveceria",
+              "type": "text"
+            },
+            {
+              "key": "style",
+              "value": "CervezaEstilo",
+              "type": "text"
+            },
+            {
+              "key": "degrees",
+              "value": "5.2",
+              "type": "text"
+            },
+            {
+              "key": "ibu",
+              "value": "30",
+              "type": "text"
+            },
+            {
+              "key": "country",
+              "value": "España",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "CervezaDescripción",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{local}}beer/",
+          "host": ["{{local}}beer"],
+          "path": [""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "createBeerRender",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2Mjk1MjFhY2E4N2ZjOWJiNjRhOGJkOGEiLCJpYXQiOjE2NTQ0MjYyMDZ9.jhFulO4Vb4e0lAP1TVsoTTOgMTQwz3YNDJP2665j_0I",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "CervezaNombre",
+              "type": "text"
+            },
+            {
+              "key": "brewery",
+              "value": "CervezaCerveceria",
+              "type": "text"
+            },
+            {
+              "key": "style",
+              "value": "CervezaEstilo",
+              "type": "text"
+            },
+            {
+              "key": "degrees",
+              "value": "5.2",
+              "type": "text"
+            },
+            {
+              "key": "ibu",
+              "value": "30",
+              "type": "text"
+            },
+            {
+              "key": "country",
+              "value": "España",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "CervezaDescripción",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/Usuario/Desktop/BOOTCAMP/PRESENCIAL/PROYECTO FINAL/introducidas/Alice Porter.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{origin}}beer/",
+          "host": ["{{origin}}beer"],
+          "path": [""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "updateBeerRender",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2Mjk1MjFhY2E4N2ZjOWJiNjRhOGJkOGEiLCJpYXQiOjE2NTQ0MjYyMDZ9.jhFulO4Vb4e0lAP1TVsoTTOgMTQwz3YNDJP2665j_0I",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "CervezaNombre",
+              "type": "text"
+            },
+            {
+              "key": "brewery",
+              "value": "CervezaCerveceria",
+              "type": "text"
+            },
+            {
+              "key": "style",
+              "value": "CervezaEstilo",
+              "type": "text"
+            },
+            {
+              "key": "degrees",
+              "value": "5.2",
+              "type": "text"
+            },
+            {
+              "key": "ibu",
+              "value": "30",
+              "type": "text"
+            },
+            {
+              "key": "country",
+              "value": "España",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "CervezaDescripción",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/Usuario/Desktop/BOOTCAMP/PRESENCIAL/PROYECTO FINAL/introducidas/Alice Porter.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{origin}}beer/6297a8369ab4b03687f15b7e",
+          "host": ["{{origin}}beer"],
+          "path": ["6297a8369ab4b03687f15b7e"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "updateBeerLocal",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2Mjk1MjFhY2E4N2ZjOWJiNjRhOGJkOGEiLCJpYXQiOjE2NTQ0MjYyMDZ9.jhFulO4Vb4e0lAP1TVsoTTOgMTQwz3YNDJP2665j_0I",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "CervezaNombre",
+              "type": "text"
+            },
+            {
+              "key": "brewery",
+              "value": "CervezaCerveceria",
+              "type": "text"
+            },
+            {
+              "key": "style",
+              "value": "CervezaEstilo",
+              "type": "text"
+            },
+            {
+              "key": "degrees",
+              "value": "5.2",
+              "type": "text"
+            },
+            {
+              "key": "ibu",
+              "value": "30",
+              "type": "text"
+            },
+            {
+              "key": "country",
+              "value": "España",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "CervezaDescripción",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/Usuario/Desktop/BOOTCAMP/PRESENCIAL/PROYECTO FINAL/introducidas/Alice Porter.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{local}}beer/6297a8369ab4b03687f15b7e",
+          "host": ["{{local}}beer"],
+          "path": ["6297a8369ab4b03687f15b7e"]
+        }
       },
       "response": []
     }

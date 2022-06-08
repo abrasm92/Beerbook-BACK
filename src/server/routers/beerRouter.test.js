@@ -51,11 +51,11 @@ describe("Given a GET to the beer/ endpoint", () => {
         .expect(200);
 
       const { body } = await request(app)
-        .get("/beer/")
+        .get(`/beer/${0}`)
         .set("Authorization", `Bearer ${token}`)
         .expect(200);
 
-      await expect(body.beers).toHaveLength(expectedLengthBeers);
+      await expect(body.beersOnPage).toHaveLength(expectedLengthBeers);
     });
   });
 });
