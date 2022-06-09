@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const Beer = require("../../db/models/beer");
 const beerpage = require("../../utilities/beerPage");
-const customError = require("../../utilities/customError");
+const customError = require("../../utilities/customError/customError");
 const getBeersByDegrees = require("../../utilities/getBeersByDegrees");
 const getBeersByIbu = require("../../utilities/getBeersByIbu");
 
