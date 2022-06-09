@@ -1,5 +1,5 @@
 const jsonwebtoken = require("jsonwebtoken");
-const customError = require("../../utilities/customError");
+const customError = require("../../utilities/customError/customError");
 
 require("dotenv").config();
 
