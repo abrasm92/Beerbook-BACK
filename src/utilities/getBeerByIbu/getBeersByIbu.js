@@ -1,15 +1,16 @@
 const getAllNumbersIbu = require("./getAllNumbersIbu");
 
 const getBeersByIbu = (value) => {
-  const allIbuBeerValue = [value];
+  let allIbuBeerValue;
   let ibu;
-  if (value === "90") {
-    for (ibu = 1; ibu < 11; ibu += 1) {
-      allIbuBeerValue.push(+value + ibu);
-    }
+  if (value !== "90") {
+    allIbuBeerValue = getAllNumbersIbu(value);
     return allIbuBeerValue;
   }
-  allIbuBeerValue.push(getAllNumbersIbu(value));
+  allIbuBeerValue = [+value];
+  for (ibu = 1; ibu < 11; ibu += 1) {
+    allIbuBeerValue.push(+value + ibu);
+  }
   return allIbuBeerValue;
 };
 

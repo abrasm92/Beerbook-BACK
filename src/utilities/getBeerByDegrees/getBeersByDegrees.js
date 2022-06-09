@@ -1,13 +1,13 @@
 const getAllNumbersDegrees = require("./getAllNumbersDegrees");
 
 const getBeersByDegrees = (valor) => {
-  let allDegreesBeerValue = [valor];
+  let allDegreesBeerValue;
 
   if (valor === "N/A") {
     allDegreesBeerValue = 0;
     return allDegreesBeerValue;
   }
-  allDegreesBeerValue.push(getAllNumbersDegrees(valor));
+  allDegreesBeerValue = getAllNumbersDegrees(valor);
   return allDegreesBeerValue;
 };
 

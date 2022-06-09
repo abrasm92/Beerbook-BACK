@@ -1,5 +1,5 @@
 const getAllNumbersDegrees = (valor) => {
-  let newNumbers;
+  const newNumbers = [valor];
   for (let decimal = 1; decimal < 10; decimal += 1) {
     newNumbers.push(`${valor}.${decimal}`);
   }
