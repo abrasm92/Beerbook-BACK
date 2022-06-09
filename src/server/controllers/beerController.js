@@ -1,10 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 const Beer = require("../../db/models/beer");
-const beerpage = require("../../utilities/beerPage");
-const customError = require("../../utilities/customError");
-const getBeersByDegrees = require("../../utilities/getBeersByDegrees");
-const getBeersByIbu = require("../../utilities/getBeersByIbu");
+const beerpage = require("../../utilities/beerPage/beerPage");
+const customError = require("../../utilities/customError/customError");
+const getBeersByDegrees = require("../../utilities/getBeerByDegrees/getBeersByDegrees");
+const getBeersByIbu = require("../../utilities/getBeerByIbu/getBeersByIbu");
 
 const getAllBeers = async (req, res, next) => {
   const { page } = req.params;
