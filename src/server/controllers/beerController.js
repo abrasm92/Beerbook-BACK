@@ -9,9 +9,13 @@ const getAllBeers = async (req, res, next) => {
   try {
     const beers = await Beer.find();
 
-    const response = beerpage(beers, page);
-
-    res.status(200).json(response);
+    if (beers.length === 0) {
+      const error = customError(404, "No se ha encontrado ninguna cerveza");
+      next(error);
+    } else {
+      const response = beerpage(beers, page);
+      res.status(200).json(response);
+    }
   } catch (error) {
     next(error);
   }
@@ -138,10 +142,78 @@ const updateBeerById = async (req, res, next) => {
   }
 };
 
+const filterBeer = async (req, res, next) => {
+  const { filter, filterValue, page } = req.params;
+
+  try {
+    let filteredBeers;
+    let response;
+    switch (filter) {
+      case "brewery":
+        filteredBeers = await Beer.find({ brewery: filterValue });
+        if (filteredBeers.length === 0) {
+          const error = customError(404, "No se ha encontrado ninguna cerveza");
+          next(error);
+        } else {
+          response = beerpage(filteredBeers, +page);
+          res.status(200).json(response);
+        }
+        break;
+      case "style":
+        filteredBeers = await Beer.find({ style: filterValue });
+        if (filteredBeers.length === 0) {
+          const error = customError(404, "No se ha encontrado ninguna cerveza");
+          next(error);
+        } else {
+          response = beerpage(filteredBeers, +page);
+          res.status(200).json(response);
+        }
+        break;
+      case "degrees":
+        filteredBeers = await Beer.find({ degrees: filterValue });
+        if (filteredBeers.length === 0) {
+          const error = customError(404, "No se ha encontrado ninguna cerveza");
+          next(error);
+        } else {
+          response = beerpage(filteredBeers, +page);
+          res.status(200).json(response);
+        }
+        break;
+      case "IBU":
+        filteredBeers = await Beer.find({ IBU: filterValue });
+        if (filteredBeers.length === 0) {
+          const error = customError(404, "No se ha encontrado ninguna cerveza");
+          next(error);
+        } else {
+          response = beerpage(filteredBeers, +page);
+          res.status(200).json(response);
+        }
+        break;
+      case "country":
+        filteredBeers = await Beer.find({ country: filterValue });
+        if (filteredBeers.length === 0) {
+          const error = customError(404, "No se ha encontrado ninguna cerveza");
+          next(error);
+        } else {
+          response = beerpage(filteredBeers, +page);
+          res.status(200).json(response);
+        }
+        break;
+      default:
+        next(
+          customError(404, "No hay ningun filtro disponible con este nombre")
+        );
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllBeers,
   getBeerById,
   deleteBeerById,
   createBeer,
   updateBeerById,
+  filterBeer,
 };
