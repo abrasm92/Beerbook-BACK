@@ -5,10 +5,10 @@ const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const app = require("..");
 const connectDB = require("../../db");
-const Beer = require("../../db/models/beer");
 const { groupOfBeer } = require("../../mocks/beerMocks");
 const { singleUser } = require("../../mocks/userMocks");
 const User = require("../../db/models/user");
+const Beer = require("../../db/models/beer");
 
 let mongoServer;
 beforeAll(async () => {
