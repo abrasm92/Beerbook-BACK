@@ -3,6 +3,8 @@ const path = require("path");
 const Beer = require("../../db/models/beer");
 const beerpage = require("../../utilities/beerPage");
 const customError = require("../../utilities/customError");
+const getBeersByDegrees = require("../../utilities/getBeersByDegrees");
+const getBeersByIbu = require("../../utilities/getBeersByIbu");
 
 const getAllBeers = async (req, res, next) => {
   const { page } = req.params;
@@ -144,10 +146,11 @@ const updateBeerById = async (req, res, next) => {
 
 const filterBeer = async (req, res, next) => {
   const { filter, filterValue, page } = req.params;
-
   try {
     let filteredBeers;
     let response;
+    let beerByDegrees;
+    let beerByIbu;
     switch (filter) {
       case "brewery":
         filteredBeers = await Beer.find({ brewery: filterValue });
@@ -160,7 +163,7 @@ const filterBeer = async (req, res, next) => {
         }
         break;
       case "style":
-        filteredBeers = await Beer.find({ style: filterValue });
+        filteredBeers = await Beer.find({ style: filterValue, filterValue });
         if (filteredBeers.length === 0) {
           const error = customError(404, "No se ha encontrado ninguna cerveza");
           next(error);
@@ -170,7 +173,8 @@ const filterBeer = async (req, res, next) => {
         }
         break;
       case "degrees":
-        filteredBeers = await Beer.find({ degrees: filterValue });
+        beerByDegrees = getBeersByDegrees(filterValue);
+        filteredBeers = await Beer.find({ degrees: beerByDegrees });
         if (filteredBeers.length === 0) {
           const error = customError(404, "No se ha encontrado ninguna cerveza");
           next(error);
@@ -180,7 +184,8 @@ const filterBeer = async (req, res, next) => {
         }
         break;
       case "IBU":
-        filteredBeers = await Beer.find({ IBU: filterValue });
+        beerByIbu = getBeersByIbu(filterValue);
+        filteredBeers = await Beer.find({ IBU: beerByIbu });
         if (filteredBeers.length === 0) {
           const error = customError(404, "No se ha encontrado ninguna cerveza");
           next(error);
