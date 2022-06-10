@@ -3,9 +3,9 @@ const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
 const userRouter = require("./routers/userRouter");
-const { notFoundError, generalError } = require("./middlewares/errors");
 const beerRouter = require("./routers/beerRouter");
-const auth = require("./middlewares/auth");
+const auth = require("./middlewares/auth/auth");
+const { notFoundError, generalError } = require("./middlewares/errors/errors");
 
 const app = express();
 

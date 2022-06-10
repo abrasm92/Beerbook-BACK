@@ -9,6 +9,7 @@ const singleBeer = {
   description:
     "Cerveza de color ámbar, con aromas intensos de cítricos, con final lig…",
   image: "215615460324502435058-fake-file.png",
+  imageBackup: "215615460324502435058-fake-file.png",
   owner: null,
 };
 
@@ -24,6 +25,7 @@ const groupOfBeer = [
     description:
       "Cerveza de color ámbar, con aromas intensos de cítricos, con final lig…",
     image: null,
+    imageBackup: null,
     owner: null,
   },
   {
@@ -37,6 +39,7 @@ const groupOfBeer = [
     description:
       "Cerveza negra con gran espuma color marrón con arómas predominantes a …",
     image: null,
+    imageBackup: null,
     owner: null,
   },
   {
@@ -50,6 +53,7 @@ const groupOfBeer = [
     description:
       "Cerveza rojiza oscura con espuma densa, cuerpo medio suave y aromatica…",
     image: null,
+    imageBackup: null,
     owner: null,
   },
 ];

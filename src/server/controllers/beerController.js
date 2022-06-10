@@ -1,5 +1,3 @@
-const fs = require("fs");
-const path = require("path");
 const Beer = require("../../db/models/beer");
 const beerpage = require("../../utilities/beerPage/beerPage");
 const customError = require("../../utilities/customError/customError");
@@ -57,28 +55,15 @@ const deleteBeerById = async (req, res, next) => {
 
 const createBeer = async (req, res, next) => {
   const beer = req.body;
-  const { file } = req;
-  const prefixImage = Date.now();
   const ownerId = req.userId;
+  const newImage = req.image;
+  const newImageBackup = req.imageBackup;
+
   try {
-    fs.rename(
-      path.join("uploads", "images", "beers", file.filename),
-      path.join(
-        "uploads",
-        "images",
-        "beers",
-        `${prefixImage}-${file.originalname}`
-      ),
-      (error) => {
-        if (error) {
-          next(error);
-        }
-      }
-    );
-    const newImage = `images/users/${prefixImage}-${file.originalname}`;
     const newBeer = {
       ...beer,
       owner: ownerId,
+      imageBackup: newImageBackup,
       image: newImage,
     };
     const createdBeer = await Beer.create(newBeer);
@@ -96,13 +81,15 @@ const updateBeerById = async (req, res, next) => {
   const beer = req.body;
   const { id } = req.params;
   const { file } = req;
-  const prefixImage = Date.now();
   const currentBeer = await Beer.findById(id);
+  const newImage = req.image;
+  const newImageBackup = req.imageBackup;
   try {
-    if (typeof file === "undefined") {
+    if (!file) {
       const updateBeer = {
         ...beer,
         image: currentBeer.image,
+        imageBackup: currentBeer.imageBackup,
       };
       await Beer.findByIdAndUpdate(id, updateBeer);
       const beerToUpdate = await Beer.findById(id);
@@ -112,24 +99,10 @@ const updateBeerById = async (req, res, next) => {
         beer: beerToUpdate,
       });
     } else {
-      fs.rename(
-        path.join("uploads", "images", "beers", file.filename),
-        path.join(
-          "uploads",
-          "images",
-          "beers",
-          `${prefixImage}-${file.originalname}`
-        ),
-        (error) => {
-          if (error) {
-            next(error);
-          }
-        }
-      );
-      const newImage = `images/users/${prefixImage}-${file.originalname}`;
       const updateBeer = {
         ...beer,
         image: newImage,
+        imageBackup: newImageBackup,
       };
       await Beer.findByIdAndUpdate(id, updateBeer);
       const beerToUpdate = await Beer.findById(id);
