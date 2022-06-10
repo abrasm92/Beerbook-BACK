@@ -52,7 +52,6 @@ const uploadFirebase = async (req, res, next) => {
               }
 
               const storage = getStorage(firebaseApp);
-
               const storageRef = ref(storage, newImage);
 
               await uploadBytes(storageRef, readFile);
