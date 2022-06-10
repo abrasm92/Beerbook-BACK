@@ -1,5 +1,3 @@
-const fs = require("fs");
-const path = require("path");
 const Beer = require("../../db/models/beer");
 const { groupOfBeer, singleBeer } = require("../../mocks/beerMocks");
 const {
@@ -198,17 +196,12 @@ describe("Given a createBeer function", () => {
       const expectedMessage = `La cerveza: ${singleBeer.name} ha sido añadida`;
       const expectStatus = 201;
       const userID = "23458jh2j53j";
-      const imageFile = "fake-file.png";
-      const imageName = "215615460324502435058-fake-file.png";
-      fs.rename = jest.fn().mockReturnValue(imageName);
-      jest.spyOn(path, "join").mockResolvedValue(imageName);
       Beer.create = jest.fn().mockResolvedValue(singleBeer);
       const req = {
-        file: {
-          originalname: imageFile,
-        },
         userId: userID,
         body: singleBeer,
+        image: "asdf",
+        imageBackup: "firebase-asdf",
       };
       const res = {
         status: jest.fn().mockReturnThis(),
@@ -228,15 +221,10 @@ describe("Given a createBeer function", () => {
   describe("When its invoked and something fails", () => {
     test("Then it should call next function", async () => {
       const userID = "23458jh2j53j";
-      const imageFile = "fake-file.png";
-      const imageName = "215615460324502435058-fake-file.png";
-      fs.rename = jest.fn().mockReturnValue(imageName);
-      jest.spyOn(path, "join").mockResolvedValue(imageName);
       Beer.create = jest.fn().mockRejectedValue();
       const req = {
-        file: {
-          originalname: imageFile,
-        },
+        image: "asdf",
+        imageBackup: "firebase-asdf",
         userId: userID,
         body: singleBeer,
       };
@@ -255,19 +243,18 @@ describe("Given a createBeer function", () => {
 
 describe("Given a updateBeerById function", () => {
   describe("When it's invoked with a file", () => {
-    test("Then it should call res' status 204 and  json with a message", async () => {
+    test("Then it should call res' status 200 and  json with a message", async () => {
       const expectedMessage = `La cerveza: ${singleBeer.name} ha sido modificada`;
       const expectStatus = 200;
       const imageFile = "fake-file.png";
-      const imageName = "215615460324502435058-fake-file.png";
-      fs.rename = jest.fn().mockReturnValue(imageName);
-      jest.spyOn(path, "join").mockResolvedValue(imageName);
       Beer.findByIdAndUpdate = jest.fn().mockResolvedValue(singleBeer);
       Beer.findById = jest.fn().mockResolvedValue(singleBeer);
       const req = {
         file: {
           originalname: imageFile,
         },
+        image: "asdf",
+        imageBackup: "firebase-asdf",
         body: singleBeer,
         params: { id: "21341243jlhhgljh12" },
       };
@@ -288,17 +275,16 @@ describe("Given a updateBeerById function", () => {
   });
 
   describe("When it's invoked withoud a file", () => {
-    test("Then it should call res' status 204 and  json with a message", async () => {
+    test("Then it should call res' status 200 and  json with a message", async () => {
       const expectedMessage = `La cerveza: ${singleBeer.name} ha sido modificada`;
       const expectStatus = 200;
-      const imageName = "215615460324502435058-fake-file.png";
-      fs.rename = jest.fn().mockReturnValue(imageName);
-      jest.spyOn(path, "join").mockResolvedValue(imageName);
       Beer.findByIdAndUpdate = jest.fn().mockResolvedValue(singleBeer);
       Beer.findById = jest.fn().mockResolvedValue(singleBeer);
       const req = {
         body: singleBeer,
         params: { id: "21341243jlhhgljh12" },
+        image: "asdf",
+        imageBackup: "firebase-asdf",
       };
       const res = {
         status: jest.fn().mockReturnThis(),
