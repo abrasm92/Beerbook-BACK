@@ -3,8 +3,8 @@ const getBeersByDegrees = require("./getBeersByDegrees");
 describe("Given a getBeersByDegrees function", () => {
   describe("When it's invoked with value 'N/A'", () => {
     test("Then it should returns 0", () => {
-      const value = "N/A";
-      const expectReturn = 0;
+      const value = "NA";
+      const expectReturn = ["0"];
 
       const returnedValue = getBeersByDegrees(value);
 
