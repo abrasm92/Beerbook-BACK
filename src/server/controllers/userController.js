@@ -63,4 +63,33 @@ const userLogin = async (req, res, next) => {
   }
 };
 
-module.exports = { userRegister, userLogin };
+const getUserById = async (req, res, next) => {
+  const { id: currentId } = req.params;
+  try {
+    const user = await User.findById(currentId);
+    if (user) {
+      delete user.password;
+      delete user.admin;
+      delete user.id;
+      const currentUser = {
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        image: user.image,
+        imageBackup: user.imageBackup,
+        age: user.age,
+        country: user.country,
+        admin: user.admin,
+        favorites: user.favorites.length,
+        creations: user.creations.length,
+      };
+      res.status(200).json({ user: currentUser });
+    } else {
+      next(customError(409, "El usuario no ha sido encontrado"));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { userRegister, userLogin, getUserById };
