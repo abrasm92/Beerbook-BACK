@@ -6,6 +6,7 @@ const userSchema = new Schema({
   password: { type: String },
   email: { type: String, unique: true },
   image: { type: String, default: null },
+  imageBackup: { type: String, default: null },
   creations: {
     type: [{ type: Schema.Types.ObjectId, ref: "Beer" }],
     default: [],
