@@ -8,7 +8,6 @@ const {
 const { registerSchema, loginSchema } = require("../schemas/userSchemas");
 
 const userRouter = express.Router();
-
 userRouter.post("/register", validate(registerSchema), userRegister);
 userRouter.post("/login", validate(loginSchema), userLogin);
 userRouter.get("/userinfo/:id", getUserById);
