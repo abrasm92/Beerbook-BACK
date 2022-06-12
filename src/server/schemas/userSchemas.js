@@ -6,10 +6,6 @@ const loginSchema = {
       .required()
       .regex(/^[a-zA-Z0-9\d\-_\s]+$/),
     password: Joi.string()
-      .email({
-        minDomainSegments: 2,
-        tlds: { allow: ["com", "net", "org", "es"] },
-      })
       .required()
       .regex(/^[a-zA-Z0-9\d\-_\s]+$/)
       .min(8)
