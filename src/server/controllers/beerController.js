@@ -3,6 +3,7 @@ const beerpage = require("../../utilities/beerPage/beerPage");
 const customError = require("../../utilities/customError/customError");
 const getBeersByDegrees = require("../../utilities/getBeerByDegrees/getBeersByDegrees");
 const getBeersByIbu = require("../../utilities/getBeerByIbu/getBeersByIbu");
+const getRandomInitialBeers = require("../../utilities/getRandomInitialBeers/getRandomInitialBeers");
 
 const getAllBeers = async (req, res, next) => {
   const { page } = req.params;
@@ -187,6 +188,21 @@ const filterBeer = async (req, res, next) => {
   }
 };
 
+const getInitialFreeBeers = async (req, res, next) => {
+  try {
+    const beers = await Beer.find();
+    if (beers.length === 0) {
+      next(customError(404, "No se han encontrado cervezas"));
+    } else {
+      const initialBeers = getRandomInitialBeers(beers);
+
+      res.status(200).json({ beers: initialBeers });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllBeers,
   getBeerById,
@@ -194,4 +210,5 @@ module.exports = {
   createBeer,
   updateBeerById,
   filterBeer,
+  getInitialFreeBeers,
 };

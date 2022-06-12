@@ -8,7 +8,9 @@ const {
   createBeer,
   updateBeerById,
   filterBeer,
+  getInitialFreeBeers,
 } = require("../controllers/beerController");
+const auth = require("../middlewares/auth/auth");
 const uploadFirebase = require("../middlewares/firebase/uploadFirebase");
 
 const uploadUser = multer({
@@ -18,16 +20,25 @@ const uploadUser = multer({
 
 const beerRouter = express.Router();
 
-beerRouter.get("/page/:page", getAllBeers);
-beerRouter.get("/:id", getBeerById);
-beerRouter.delete("/:id", deleteBeerById);
-beerRouter.post("/", uploadUser.single("image"), uploadFirebase, createBeer);
+beerRouter.get("/freerandom", getInitialFreeBeers);
+
+beerRouter.get("/page/:page", auth, getAllBeers);
+beerRouter.get("/:id", auth, getBeerById);
+beerRouter.delete("/:id", auth, deleteBeerById);
+beerRouter.post(
+  "/",
+  auth,
+  uploadUser.single("image"),
+  uploadFirebase,
+  createBeer
+);
 beerRouter.put(
   "/:id",
+  auth,
   uploadUser.single("image"),
   uploadFirebase,
   updateBeerById
 );
-beerRouter.get("/filter/:filter/:filterValue/:page", filterBeer);
+beerRouter.get("/filter/:filter/:filterValue/:page", auth, filterBeer);
 
 module.exports = beerRouter;
