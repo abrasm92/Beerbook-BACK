@@ -17,7 +17,7 @@ const getRandomInitialBeers = (beers) => {
       indexesOfBeers[index],
       indexesOfBeers[index] + 1
     );
-    randomBeers.push(currentBeer);
+    randomBeers.push(currentBeer[0]);
   }
 
   return randomBeers;
