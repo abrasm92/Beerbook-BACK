@@ -1,5 +1,10 @@
 const Beer = require("../../db/models/beer");
-const { groupOfBeer, singleBeer } = require("../../mocks/beerMocks");
+const {
+  groupOfBeer,
+  singleBeer,
+  longGroupOfBeers,
+} = require("../../mocks/beerMocks");
+
 const {
   getAllBeers,
   getBeerById,
@@ -7,6 +12,7 @@ const {
   createBeer,
   updateBeerById,
   filterBeer,
+  getInitialFreeBeers,
 } = require("./beerController");
 
 describe("Given a getAllBeers function", () => {
@@ -545,6 +551,56 @@ describe("Given a filterBeer function", () => {
       const next = jest.fn();
 
       await filterBeer(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a getInitialfreeBeers function", () => {
+  describe("When it's invoked and it work rigth", () => {
+    test("Then it shuold call res's status 200 and json with a list of beers", async () => {
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      Beer.find = jest.fn().mockResolvedValue(longGroupOfBeers);
+
+      const expectedStatus = 200;
+
+      await getInitialFreeBeers(null, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it's invoked and it work rigth but find don't returns any beer", () => {
+    test("Then it shuold call next function with a custom error", async () => {
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      Beer.find = jest.fn().mockResolvedValue([]);
+      const next = jest.fn();
+      const customError = new Error();
+
+      await getInitialFreeBeers(null, res, next);
+
+      expect(next).toHaveBeenCalledWith(customError);
+    });
+  });
+
+  describe("When it's invoked and it fails", () => {
+    test("Then it shuold call next function", async () => {
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      Beer.find = jest.fn().mockRejectedValue();
+      const next = jest.fn();
+
+      await getInitialFreeBeers(null, res, next);
 
       expect(next).toHaveBeenCalled();
     });
