@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const User = require("../../db/models/user");
-const { singleUser, adminMock } = require("../../mocks/userMocks");
-const { userRegister, userLogin } = require("./userController");
+const { singleUser, adminMock, userData } = require("../../mocks/userMocks");
+const { userRegister, userLogin, getUserById } = require("./userController");
 
 jest.mock("bcrypt", () => ({
   hash: jest.fn().mockResolvedValue(() => "mockPasswordEncrypted"),
@@ -153,6 +153,75 @@ describe("Given userLogin function", () => {
       const next = jest.fn();
 
       await userLogin(req, null, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a getUserById function", () => {
+  describe("When its invoked with id on req's params and it exists", () => {
+    test("Then its should call res' status 200 and json with a userData", async () => {
+      User.findById = jest.fn().mockResolvedValue(userData);
+      const expectedUser = { ...userData };
+      delete expectedUser.password;
+      delete expectedUser.id;
+      expectedUser.favorites = 2;
+      expectedUser.creations = 3;
+      const expectResponse = { user: expectedUser };
+      const expectStatus = 200;
+      const req = {
+        params: {
+          id: "1234",
+        },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      await getUserById(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectStatus);
+      expect(res.json).toHaveBeenCalledWith(expectResponse);
+    });
+  });
+
+  describe("When its invoked with id on req's params and it dosen't exists", () => {
+    test("Then its should call next", async () => {
+      User.findById = jest.fn().mockResolvedValue(null);
+      const next = jest.fn();
+      const req = {
+        params: {
+          id: "1234",
+        },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      await getUserById(req, res, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe("When its invoked with id on req's params but findById fails", () => {
+    test("Then its should call next", async () => {
+      User.findById = jest.fn().mockRejectedValue();
+      const next = jest.fn();
+      const req = {
+        params: {
+          id: "1234",
+        },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      await getUserById(req, res, next);
 
       expect(next).toHaveBeenCalled();
     });

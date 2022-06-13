@@ -91,9 +91,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{local}}beer/",
+          "raw": "{{local}}beer/0",
           "host": ["{{local}}beer"],
-          "path": [""]
+          "path": ["0"]
         }
       },
       "response": []
@@ -426,6 +426,103 @@
           "raw": "{{local}}beer/6297a8369ab4b03687f15b7e",
           "host": ["{{local}}beer"],
           "path": ["6297a8369ab4b03687f15b7e"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "filterBeerLocal",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "filterBeerRender",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}beer/filter/brewery/Brewdog/0",
+          "host": ["{{origin}}beer"],
+          "path": ["filter", "brewery", "Brewdog", "0"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getUserByIdLocal",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{local}}user/userinfo/6296216bfa9a25b9c2a8dc47",
+          "host": ["{{local}}user"],
+          "path": ["userinfo", "6296216bfa9a25b9c2a8dc47"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getUserByIdRender",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"admin\",\r\n    \"username\": \"admin\",\r\n    \"password\": \"beerbook\",\r\n    \"email\": \"admin@admin.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{origin}}user/userinfo/6296216bfa9a25b9c2a8dc47",
+          "host": ["{{origin}}user"],
+          "path": ["userinfo", "6296216bfa9a25b9c2a8dc47"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getrandomBeersLocal",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{local}}beer/freerandom",
+          "host": ["{{local}}beer"],
+          "path": ["freerandom"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getrandomBeersRender",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{origin}}beer/freerandom",
+          "host": ["{{origin}}beer"],
+          "path": ["freerandom"]
         }
       },
       "response": []
