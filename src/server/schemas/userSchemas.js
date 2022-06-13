@@ -1,6 +1,6 @@
 const { Joi } = require("express-validation");
 
-const pattern = /^[a-zA-Z0-9\d\-_\s]+$/;
+const pattern = /^[a-zA-Z\d\-_\s]+$/;
 
 const loginSchema = {
   body: Joi.object({
