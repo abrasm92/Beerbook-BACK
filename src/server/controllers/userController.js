@@ -69,7 +69,6 @@ const getUserById = async (req, res, next) => {
     const user = await User.findById(currentId);
     if (user) {
       delete user.password;
-      delete user.admin;
       delete user.id;
       const currentUser = {
         name: user.name,

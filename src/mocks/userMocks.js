@@ -33,4 +33,19 @@ const groupUsers = [
   },
 ];
 
-module.exports = { singleUser, groupUsers, adminMock };
+const userData = {
+  name: "admin",
+  username: "admin",
+  email: "admin@admin.com",
+  image: "",
+  imageBackup: "",
+  age: 29,
+  country: "España",
+  admin: true,
+  favorites: ["1", "2"],
+  creations: ["1", "2", "3"],
+  password: "1234",
+  id: "1234",
+};
+
+module.exports = { singleUser, groupUsers, adminMock, userData };
