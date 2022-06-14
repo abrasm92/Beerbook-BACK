@@ -11,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 app.use(
   helmet({
     crossOriginResourcePolicy: false,
