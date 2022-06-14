@@ -15,7 +15,7 @@ const userSchema = new Schema({
     type: [{ type: Schema.Types.ObjectId, ref: "Beer" }],
     default: [],
   },
-  age: { type: Date, default: null },
+  age: { type: Number, default: null },
   country: { type: String, default: null },
   admin: { type: Boolean, default: false },
 });
