@@ -55,7 +55,7 @@
       "!src/index.js",
       "!src/server/initializeServer.js",
       "!src/db/index.js",
-      "!src/mocks/**/*.js"
+      "!src/mocks/*"
     ]
   }
 }
