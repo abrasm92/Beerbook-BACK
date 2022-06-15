@@ -7,6 +7,7 @@ Endpoints:
 
 POST /register "para registrar usuario"
 POST /login "para comprovar credenciales del user y permitir login"
+GET /:id "para recoger lainformación completa del usuario"
 
 ////////////////////////////////////////////////
 
@@ -17,9 +18,6 @@ GET /:id "para recoger una sola cerveza en base a su id"
 DELETE /:id "para eliminar una cerveza de la base de datos"
 POST /create "para crear una nueva cerveza en la base de datos"
 PUT /edit "para editar una cerveza ya existente"
-GET /owner "para recoger todas las cervezas propias del usuario"
-GET /name/:name "para cervezas recoger segun su nombre"
-GET /brewery/:brewery "para cervezas recoger segun su fabricante"
 GET /country/:country "para cervezas recoger segun su pais"
 GET /gredees/:greedes "para cervezas recoger segun su graduacion"
 GET /style/:style "para cervezas recoger segun su estilo"
